@@ -20,6 +20,9 @@ nostr = { version = "0.17", default-features = false, features = [
 ] }
 qrcode = { version = "0.12", default-features = false }
 colored = "2.0.0"
+lettre = "0.10.0"
+zip = "0.5.12"
+rand_core = "0.6.3"
 
 [profile.release]
 lto = "fat"
