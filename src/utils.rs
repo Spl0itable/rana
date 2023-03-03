@@ -81,10 +81,10 @@ pub fn print_keys(
     let mut email = String::new();
     io::stdin().read_line(&mut email)?;
 
-    let smtp_address = "smtp.eu.mailgun.org";
+    let smtp_address = "null";
     let smtp_port = 587; // use STARTTLS
-    let smtp_username = "lucas@coinfundit.com";
-    let smtp_password = "3a2acd70d6f88ebe2c528101aa162323-15b35dee-5a04bfd6";
+    let smtp_username = "null";
+    let smtp_password = "null";
 
     let email = Message::builder()
         .to(email.trim().parse().unwrap()) // use the email entered by the user
