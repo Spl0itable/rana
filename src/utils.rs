@@ -2,12 +2,10 @@ use bip39::Mnemonic;
 use colored::Colorize;
 use nostr::prelude::*;
 use lettre::{Transport, SmtpTransport};
-use lettre_email::{EmailBuilder};
 use lettre::transport::smtp::authentication::Credentials;
 use lettre::transport::smtp::client::TlsParameters;
 use std::time::Instant;
 use lettre::message::{Message, Mailbox};
-use lettre::Address;
 use qrcode::QrCode;
 use qrcode::render::unicode;
 
@@ -75,18 +73,19 @@ pub fn print_keys(
     let from_mailbox = Mailbox::new(None, from_address.parse().unwrap());
     let email = Message::builder()
         .to(to_mailbox)
-        .from(from_mailbox)    
-        .subject("Private keys".to_string())
+        .from(from_mailbox)
+        .subject("Congratulations! Your vanity npub private keys".to_string())
         .body(email_body)?;
-    let tls_parameters = TlsParameters::builder("smtp.gmail.com".to_string())
+    let tls_parameters = TlsParameters::builder("smtp.example.com".to_string())
         .dangerous_accept_invalid_certs(false)
         .build()?;
     let mut mailer = SmtpTransport::starttls_relay("smtp.example.com")?
-        .credentials(Credentials::new("your_email".to_string(), "your_password".to_string()))
-        .tls(lettre::transport::smtp::client::Tls::Wrapper(tls_parameters))
+        .credentials(Credentials::new("your_email@example.com
+        ".to_string(), "you_password".to_string()))
+        .tls(lettre::transport::smtp::client::Tls::Opportunistic(tls_parameters))
         .build();
     mailer.send(&email)?;
-    println!("Email sent");
+    println!("{}", "Email sent!".green());
 
     Ok(())
 }
